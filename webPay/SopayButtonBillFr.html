@@ -1,0 +1,46 @@
+<!doctype html>
+    <a class="btn btn-primary btn-lg sb launch" href="https://soleaspay.com/webPay/v2/SopayFormBillFr.html" target="SopayButtonWindow" title="Cliquez pour payer" onclick="openRequestedPopup(this.href, this.target); return false;">
+         <img src="https://soleaspay.com/webPay/asset/sopay.png" height="auto" width="30">  <span class="spBtnTitle" >Payez maintenant</span>
+    </a> 
+
+
+    <script type="text/javascript">
+                      var WindowObjectReference = null; // variable globale
+            let params = JSON.parse(localStorage.getItem('sopaybuttonStorageKey'));
+            function openRequestedPopup(strUrl, strWindowName) {
+              if(WindowObjectReference == null || WindowObjectReference.closed) {
+                WindowObjectReference = window.open(strUrl, strWindowName,
+                      "width=480,height=650resizable=yes,scrollbars=yes,status=yes");
+                    }
+                    else {
+                      WindowObjectReference.focus();
+                    };
+                  }
+            function initButtonLabel(label){
+              if (label){
+                var titles = document.getElementsByClassName('spBtnTitle');
+                setInterval(()=>{
+                  if(titles[0].textContent != label){
+                    for (let index = 0; index < titles.length; index++) {
+                      titles[index].innerHTML = label;    
+                    }
+                  }
+                },1000)  
+              }
+            }
+            
+          initButtonLabel(params.btnTitle)
+          window.addEventListener("message", (event) => {
+          // Do we trust the sender of this message?  (might be
+          // different from what we originally opened, for example).
+          if (event.origin == 'https://soleaspay.com')
+            if(event.data === 'isReady'){
+                WindowObjectReference.postMessage(params, 'https://soleaspay.com')
+            }else{
+              params.res = event.data
+              localStorage.setItem('sopaybuttonStorageKey', JSON.stringify(params))
+              initButton() 
+            }
+        }, false);
+        </script>
+</html>

@@ -1,0 +1,180 @@
+<!doctype html>
+<head>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link href='https://soleaspay.com/webPay/index.css' rel='stylesheet'>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Soleaspay invoicing button</title>
+</head>
+<body>
+
+        
+        <div class="container" style="width: auto;">
+            <div class="sb" id="loader"></div>
+                <div class="d-flex flex-row justify-content-between">
+                    <div></div>
+                    <div class=""><img src="https://soleaspay.com/webPay/asset/sopay.png" height="auto" width="30"></div>
+                    <div class=""></div>
+                </div>
+                
+                <div class="sb tabs mt-3">
+                    <div class="col-md-12">
+                        <div class="card card-blue p-3 text-white mb-3"> <span>You have to pay</span>
+                            <div class="d-flex flex-column  mb-3">
+                                <h1 class="mb-0 yellow" id="detail_amount"></h1>
+                                <span id="detail_description"></span>
+                            </div> 
+                            <div class="sb inputbox"> <input type="text" id="payer_name" name="payer" class="sb form-control" placeholder="Fill Your Name"> </div>
+                        </div>
+                        
+                    </div>
+                    <p class="text-center d-flex flex-column" >
+                        <span style="color: black;">Select the method from which you wish to pay</span>
+                        <span style="color:red; font-size:small">* Make sure you have the amount to pay in your account</span>
+                    </p>
+                        <ul class="sb nav nav-pills" id="myTab" role="tablist">
+                            <li class="sb nav-item" role="presentation"> <a class="nav-link active" id="orange-tab" data-toggle="tab" href="#orange" role="tab" aria-controls="orange" aria-selected="false"> <img src="https://soleaspay.com/webPay/asset/orangemoney.jpeg" height="auto" width="80"> </a> </li>
+                            <li class="sb nav-item" role="presentation"> <a class="nav-link" id="mtn-tab" data-toggle="tab" href="#mtn" role="tab" aria-controls="mtn" aria-selected="false"> <img src="https://soleaspay.com/webPay/asset/mobilemoney.png" height="auto" width="80"> </a> </li>
+                            <li class="sb nav-item" role="presentation"> <a class="nav-link" id="eu-tab" data-toggle="tab" href="#eu" role="tab" aria-controls="eu" aria-selected="false"> <img src="https://soleaspay.com/webPay/asset/eu.png" height="auto" width="80"> </a> </li>
+                            <li class="sb nav-item" role="presentation"> <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false"> <img src="https://i.imgur.com/yK7EDD1.png" height="auto" width="80"> </a> </li>
+                            <li class="sb nav-item" role="presentation"> <a class="nav-link" id="bitcoin-tab" data-toggle="tab" href="#bitcoin" role="tab" aria-controls="bitcoin" aria-selected="true"> <img src="https://soleaspay.com/webPay/asset/cryptocurrency.jpg" height="auto" width="80"> </a> </li>
+                            <li class="sb nav-item" role="presentation"> <a class="nav-link" id="pm-tab" data-toggle="tab" href="#pm" role="tab" aria-controls="pm" aria-selected="false"> <img src="https://soleaspay.com/webPay/asset/perfectmoney.png" height="auto" width="80"> </a> </li>
+                        </ul>
+                    
+                    <div class="sb tab-content" id="myTabContent">
+                        
+                        <div class="tab-pane fade " id="bitcoin" role="tabpanel" aria-labelledby="bitcoin-tab">
+                            <div class="text-center">
+                                <h5>Cryptocurrency</h5>
+                            </div>
+                            <div class="px-5 mt-5">
+                                <form id="bitcoin_form"  method="post" onsubmit="return false" >
+                                    <!-- <div id="bitcoin_detail" class="alert alert-secondary" role="alert">
+                                    </div> -->
+                                    
+                                    <div class="sb inputbox">
+                                        <select class="sb form-select" id="bitcoin_service" aria-label="Default select example" required>
+                                        <option>Select cryptocurrency...</option>               
+                                        <option value="3">Bitcoin</option>
+                                        <option value="10">Litecoin</option>
+                                        <option value="11">Dogecoin</option>
+                                        <!-- <option value="9">Euthereum</option> -->
+                                      </select>
+                                    </div>
+                                    
+                                <div class="pay px-5"> <button class="btn btn-primary btn-block">Pay</button> </div>
+                                </form>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="paypal" role="tabpanel" aria-labelledby="paypal-tab">
+                            <div class="text-center">
+                                <h5>PayPal</h5>
+                            </div>
+                            <div class="px-5 mt-5">
+                              <form id="paypal_form"  method="post" onsubmit="return false;" >
+                                <div class="sb inputbox"> <input type="email" id="paypal_wallet" name="name" class="sb form-control" placeholder="Paypal Email Address" required="required"> </div>
+                                <input type="hidden" id="paypal_service" value="7"/>
+                                <div class="pay px-5"> <button type="submit" class="btn btn-primary btn-block">Pay</button> </div>
+                              </form>
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show active" id="orange" role="tabpanel" aria-labelledby="orange-tab">
+                            <div class="text-center">
+                                <h5>Orange Money</h5>
+                            </div>
+                            <div class="px-5 mt-5">
+                                <form id="om_form" method="post" onsubmit="return false;" >
+                                     
+                                    <div class="sb inputbox"> <input type="phone" id="om_wallet" name="wallet" class="sb form-control" required="required" placeholder="Phone Number"> </div>
+                                    <!--div class="sb inputbox"> <input type="hidden" value = '00' id="om_otp" name="otp" class="sb form-control"  placeholder="One Time Password"></div-->
+                                    <input type="hidden" id="om_service" value="2"/>
+                                    <input type="hidden" value = '00' id="om_otp" name="otp">
+                                    <div class="pay px-5"> <button type="submit" class="btn btn-primary btn-block">Pay</button> </div>
+                                </form>
+                                   
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="mtn" role="tabpanel" aria-labelledby="mtn-tab">
+                            <div class="text-center">
+                                <h5>Mobile Money</h5>
+                            </div>
+                            <div class="px-5 mt-5">
+                                <form id="momo_form" method="post" onsubmit="return false;" >
+                                    
+                                <div class="sb inputbox"> <input type="phone" id="momo_wallet" name="wallet" class="sb form-control" required="required" placeholder="Phone Number"> </div>
+                                <input type="hidden" id="momo_service" value="1"/>
+                                <div class="pay px-5"> <button type="submit" class="btn btn-primary btn-block">Pay</button> </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="eu" role="tabpanel" aria-labelledby="mtn-tab">
+                            <div class="text-center">
+                                <h5>EU Mobile Money</h5>
+                            </div>
+                            <div class="px-5 mt-5">
+                                <form id="eu_form" method="post" onsubmit="return false;" >
+                                    
+                                    <div class="sb inputbox"> <input type="phone" id="eu_wallet" name="wallet" class="sb form-control" required="required" placeholder="Phone Number"> </div>
+                                    <input type="hidden" id="eu_service" value="5"/>
+                                    <div class="pay px-5"> <button type="submit" id="eu_btn" class="btn btn-primary btn-block">Pay</button> </div>
+                                </form>
+                                    
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pm" role="tabpanel" aria-labelledby="pm-tab">
+                            <div class="text-center">
+                                <h5>Perfect Money</h5>
+                            </div>
+                            <div class="px-5 mt-5">
+                                <form id="pm_form" method="post" onsubmit="return false;" >
+                                    <input type="hidden" id="pm_service" value="8"/>
+                                    <div class="pay px-5"> <button type="submit" id="pm_btn" class="btn btn-primary btn-block">Pay</button> </div>
+                                </form>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type='text/javascript' src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
+        <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <script src="https://unpkg.com/jspdf-invoice-template@1.3.1/dist/index.js"></script>
+        <script type='text/javascript'>
+            
+            
+            
+            //Loaded Scripts
+            const lang= {
+                momo:{
+                    title: "Confirm !",
+                    content: "Confirm your mobile money's transaction by typing *126#"
+                },
+                eu:{
+                    title: "Confirm !",
+                    content: "Confirm your Express Union transaction on your mobile app EU"
+                },
+                bitcoin:{
+                    title: "Proceed To Transaction",
+                    content: "Please make transfert on this wallet",
+                    total: "Amount to transfert :"
+                },
+                om: {
+                    title: "Confirm !",
+                    content: "Confirm your orange money's transaction by typing #150*50#"
+                }
+                };
+            
+            
+        </script>
+        <script type='text/javascript' src="https://soleaspay.com/sandbox/js/ProcessBill-sandbox.min.js"></script>
+    </body>
+</html>

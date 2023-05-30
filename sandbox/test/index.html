@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Test</title>
+</head>
+<body>
+    <div class="sopayButton"></div>
+</body>
+<script id="SBScript" type="text/javascript" data-lang="fr" data-apikey="x9eXA1cVreefQX3xQnjzhJYWduDh-hMk0o4ba6veCPw" src="https://soleaspay.com/webPay/v2/sopayButton.min.js" ></script>
+<script>
+    /*const options  = {
+        amount: 200, // Amount to pay by the user for billing mode
+        successUrl: '', //Url where redirected after process finish. only for perfect money
+        currency: 'USD', // Currency use in your website 
+        description: 'payment test', // Payment description
+        btnTitle: 'Buy today',
+        businessName: 'Shop'
+        }
+        //SopayButton.tiping(options)
+        SopayButton.billing(options)
+        .then((res)=>console.log(res))
+        .catch((err)=>console.log(err))
+    */
+    let params = window.localStorage.getItem('test');
+    console.log(params);
+</script>
+</html>

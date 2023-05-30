@@ -1,0 +1,24 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+
+  <script>
+    window.onload = function() {
+      // set this to YOUR domain in production!!
+      targetOrigin = '*'; 
+
+      function handleMessage(event) {
+        if (event.data === 'openerMessage') {
+          document.body.innerHTML += '<br />';
+          document.body.innerHTML += 'got event from opener window!';
+        } 
+      }
+
+      window.addEventListener('message', handleMessage, false);
+
+      window.opener.postMessage('openedReady', targetOrigin);
+    }
+  </script>
+</head>
+<body>hi2</body>
+</html>
