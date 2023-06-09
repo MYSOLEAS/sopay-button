@@ -8,7 +8,11 @@
    <script type="text/javascript">
 
       var WindowObjectReference = null; // variable globale
-      let params = JSON.parse(localStorage.getItem('sopaybuttonStorageKey'));
+      if(typeof params === 'undefined' || params === null){
+        params = JSON.parse(localStorage.getItem('sopaybuttonStorageKey'));
+      }else{
+        let params = JSON.parse(localStorage.getItem('sopaybuttonStorageKey'));
+      }
       function openRequestedPopup(strUrl, strWindowName) {
         if(WindowObjectReference == null || WindowObjectReference.closed) {
           WindowObjectReference = window.open(strUrl, strWindowName,
@@ -21,7 +25,7 @@
       function initButtonLabel(label){
         if (label){
           var titles = document.getElementsByClassName('spBtnTitle');
-          setInterval(()=>{
+          let spBtnLabel = setInterval(()=>{
             if(titles[0].textContent != label){
               for (let index = 0; index < titles.length; index++) {
                 titles[index].innerHTML = label;    
