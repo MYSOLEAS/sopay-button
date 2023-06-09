@@ -3,7 +3,7 @@ const scripts = document.getElementById('SBScript');
 const language = scripts.getAttribute("data-lang");
 //Plugin
 const SopayButton = {
-    billing: function({businessName, amount, description, orderId, currency, btnTitle, successUrl, loadInvoice, ref}){
+    billing: function({businessName, amount, description, orderId, currency, btnTitle, successUrl, loadInvoice}){
 
         return new Promise((resolve, reject)=>{
             const scripts = document.getElementById('SBScript');
@@ -18,8 +18,7 @@ const SopayButton = {
                 successUrl,
                 orderId,
                 apiKey,
-                loadInvoice,
-                ref
+                loadInvoice
             };
             // laod sopay button page
              // Init JQuery
@@ -59,7 +58,7 @@ const SopayButton = {
 
         });        
     },
-    tiping: function ({businessName, btnTitle, orderId, successUrl, currency, description, loadInvoice, ref}){
+    tiping: function ({businessName, btnTitle, orderId, successUrl, currency, description, loadInvoice}){
 
         return new Promise((resolve, reject)=>{
             const scripts = document.getElementById('SBScript');
@@ -73,8 +72,7 @@ const SopayButton = {
                 successUrl,
                 orderId,
                 apiKey,
-                loadInvoice,
-                ref
+                loadInvoice
             };
             
             // Init JQuery
